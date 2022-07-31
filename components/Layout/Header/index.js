@@ -25,7 +25,6 @@ export const Header = ({title}) => {
     const [current, setCurrent] = useState(router.pathname.split('/')[1] || 'home');
 
     const onClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
         if(e.key === 'home') {
             return  router.push('/')
