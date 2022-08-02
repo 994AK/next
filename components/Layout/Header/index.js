@@ -11,15 +11,15 @@ export const Header = ({title}) => {
         {
             label: '首页',
             key: 'home',
-        },
-        {
-            label: '指令',
-            key: 'instruction',
-        },
-        {
-            label: '公告',
-            key: 'server',
         }
+        // {
+        //     label: '指令',
+        //     key: 'instruction',
+        // },
+        // {
+        //     label: '公告',
+        //     key: 'server',
+        // }
     ]
 
     const [current, setCurrent] = useState(router.pathname.split('/')[1] || 'home');
