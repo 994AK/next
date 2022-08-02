@@ -26,7 +26,7 @@ const useWhitelistFromEffect = (name, handleClickClosureWindow, resetForm) => {
     // 验证码请求
     function postWhitelistCode(email, username) {
         // post 发送验证码
-        fetch(process.env.FETCH_SEVER + 'api/minecraft/postWhitelistCode', {
+        fetch( `/api/minecraft/postWhitelistCode`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const useWhitelistFromEffect = (name, handleClickClosureWindow, resetForm) => {
     // 提交表单请求
     function postWhitelist(username, email, code) {
         // post 发送验证码
-        fetch(process.env.FETCH_SEVER + 'api/minecraft/postWhitelist', {
+        fetch('api/minecraft/postWhitelist', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
