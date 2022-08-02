@@ -76,7 +76,7 @@ export default function Whitelist() {
                             className={`
                             transition duration-500 ease-in-out 
                             outline-none h-10 pl-3 border-2 
-                            rounded-md cursor-pointer 
+                            rounded-md cursor-text
                             focus:border-blue-700
                             ${check && 'border-red-500 '}`}
                         ></input>

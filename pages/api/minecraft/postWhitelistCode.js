@@ -1,6 +1,12 @@
 import {createTransport} from 'nodemailer'
 import {query} from "../../../lib/db";
+import {runMiddleware} from "../../../lib/cors";
 
+import Cors from 'cors'
+
+const cors = Cors({
+    methods: ['POST','GET', 'HEAD'],
+})
 
 async function mysql(username, email, codeName) {
     /*
@@ -9,7 +15,6 @@ async function mysql(username, email, codeName) {
     const querySql = `SELECT email from emailauth WHERE email='${email}';`
     const valuesParams = []
     const data = await query({query: querySql, values: valuesParams})
-
     if(data.length === 0) {
         // 首次插入
         const insert = `INSERT INTO emailauth (username,email,code) VALUES ('${username}','${email}','${codeName}');`
@@ -26,6 +31,9 @@ async function mysql(username, email, codeName) {
 
 export default async function postWhitelistCode(req, res) {
     if (req.method !== 'POST') return res.status(500).json({code: '2', msg: '请使用post请求'})
+
+    await runMiddleware(req,res,cors)
+
     try {
         const {username, email} = req.body || {};
 

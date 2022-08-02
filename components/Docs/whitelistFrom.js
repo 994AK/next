@@ -26,7 +26,7 @@ const useWhitelistFromEffect = (name, handleClickClosureWindow, resetForm) => {
     // 验证码请求
     function postWhitelistCode(email, username) {
         // post 发送验证码
-        fetch('http://localhost:3000/api/minecraft/postWhitelistCode', {
+        fetch(process.env.FETCH_SEVER + 'api/minecraft/postWhitelistCode', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const useWhitelistFromEffect = (name, handleClickClosureWindow, resetForm) => {
     // 提交表单请求
     function postWhitelist(username, email, code) {
         // post 发送验证码
-        fetch('http://localhost:3000/api/minecraft/postWhitelist', {
+        fetch(process.env.FETCH_SEVER + 'api/minecraft/postWhitelist', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -105,7 +105,6 @@ const useWhitelistFromEffect = (name, handleClickClosureWindow, resetForm) => {
             setCodeMsg('重新发送验证码')
             setShowDisabled(false)
             postWhitelistCode(email, username)
-
         }
 
         !regex.test(email) ? regexEmail() : regexPass()
@@ -135,7 +134,7 @@ const useWhitelistFromEffect = (name, handleClickClosureWindow, resetForm) => {
     }
 }
 
-export default function WhitelistFrom({handleClickClosureWindow, name,resetForm}) {
+export default function WhitelistFrom({handleClickClosureWindow, name, resetForm}) {
 
     const {
         handleChangeEmailForm,
@@ -145,7 +144,7 @@ export default function WhitelistFrom({handleClickClosureWindow, name,resetForm}
         showDisabled,
         emailForm,
         codeMsg
-    } = useWhitelistFromEffect(name, handleClickClosureWindow,resetForm)
+    } = useWhitelistFromEffect(name, handleClickClosureWindow, resetForm)
 
 
     return (

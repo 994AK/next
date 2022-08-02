@@ -1,6 +1,12 @@
 import {query} from "../../../lib/db";
-
 import {Rcon} from "rcon-client"
+import {runMiddleware} from "../../../lib/cors";
+
+import Cors from 'cors'
+
+const cors = Cors({
+    methods: ['POST','GET', 'HEAD'],
+})
 
 /*
 * 1. 先查询他输入的code与数据库一样
@@ -51,8 +57,10 @@ async function deleteCode(email) {
 export default async function postWhitelist(req, res) {
     if (req.method !== 'POST') return res.status(500).json({code: '2', msg: '请使用post请求'})
 
+    await runMiddleware(req,res,cors)
+
     const rcon = await Rcon.connect({
-        host: "52mc.top", port: 539, password: "Kk5201314"
+        host: process.env.RCON_HOST, port: process.env.RCON_PORT, password: process.env.RCON_PASS
     })
 
     const {username, email, code} = req.body
