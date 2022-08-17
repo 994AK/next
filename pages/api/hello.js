@@ -8,7 +8,7 @@ const cors = Cors({
 })
 
 export default async function handler(req, res) {
-    const data = await status('52mc.top', 538)
+    const data = await status('159.75.79.184', 25565)
 
     await runMiddleware(req,res,cors)
 

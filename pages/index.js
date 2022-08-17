@@ -40,5 +40,4 @@ export default function Home() {
             </main>
         </div>
     </animated.div>
-
 }
