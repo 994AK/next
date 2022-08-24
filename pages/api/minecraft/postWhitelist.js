@@ -1,6 +1,6 @@
-import {query} from "../../../lib/db";
+import {query} from "lib/db";
 import {Rcon} from "rcon-client"
-import {runMiddleware} from "../../../lib/cors";
+import {runMiddleware} from "lib/cors";
 
 import Cors from 'cors'
 

@@ -1,6 +1,6 @@
 import {createTransport} from 'nodemailer'
-import {query} from "../../../lib/db";
-import {runMiddleware} from "../../../lib/cors";
+import {query} from "lib/db";
+import {runMiddleware} from "lib/cors";
 
 import Cors from 'cors'
 

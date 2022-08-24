@@ -1,4 +1,4 @@
-import {query} from "../../../../lib/startDB";
+import {query} from "lib/startDB";
 
 export default async function postStartInfo(req,res) {
     if(req.method !== 'POST') return res.status(500).json({code: '2', msg: '请使用post请求'})
