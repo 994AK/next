@@ -82,11 +82,12 @@ export default function Whitelist() {
                         ></input>
                     </div>
                     <div>
+                        {/*onClick={handleClickOneWindow}*/}
                         <button
-                            onClick={handleClickOneWindow}
+
                             type='submit'
-                            className='ml-2  h-10  w-20 rounded-md bg-purple-600 text-white hover:bg-purple-800'
-                        >提交
+                            className='ml-2  h-10 rounded-md bg-purple-600 text-white hover:bg-purple-800'
+                        >白名单提交暂时关闭
                         </button>
                     </div>
                 </div>
