@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {status} from "minecraft-server-util";
-import {runMiddleware} from "../../lib/cors";
+import {runMiddleware} from "lib/cors";
 import Cors from 'cors'
 
 const cors = Cors({

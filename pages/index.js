@@ -1,10 +1,9 @@
-
 import useSWR from 'swr'
 import {useSpring, animated} from 'react-spring'
 import {useRouter} from 'next/router'
-import styles from '../styles/Home.module.scss'
-import Players from "../components/Players/Players";
-import Whitelist from "../components/Docs/whitelist";
+import styles from 'styles/Home.module.scss'
+import Players from "components/Players/Players";
+import Whitelist from "components/Docs/whitelist";
 
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
