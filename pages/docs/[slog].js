@@ -1,9 +1,9 @@
-import style from '../../styles/docs/index.module.scss'
+import style from 'styles/docs/index.module.scss'
 import {useRouter} from 'next/router'
 import { DownOutlined } from '@ant-design/icons';
 import { Tree } from 'antd';
 
-import {RouterPage} from "../../components/Docs/routerPage";
+import {RouterPage} from "components/Docs/routerPage";
 import {useSpring, animated} from "react-spring";
 
 const treeData = [
