@@ -1,9 +1,9 @@
 /* 蓝色卡片 - 普通*/
 .card-blue {
- @apply bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600
+  @apply bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600;
 }
 
 /* 红色卡片 - 比较重点 */
 .card-red {
- @apply bg-gradient-to-r from-red-500 via-red-300 to-red-500
+  @apply bg-gradient-to-r from-red-500 via-red-300 to-red-500;
 }

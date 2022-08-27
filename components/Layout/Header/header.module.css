@@ -1,23 +1,22 @@
 .menu {
-    display: flex;
-    justify-content: center;
-    font-size: 18px;
-    padding-top: 5px;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  padding-top: 5px;
+  height: 100%;
 }
 
 .col {
-    height: 60px;
-    border-bottom: 1px solid #f0f0f0;
+  height: 60px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-
 .title {
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 
-    font-size: 18px;
-    color: #ffd666;
+  font-size: 18px;
+  color: #ffd666;
 }

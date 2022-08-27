@@ -1,67 +1,66 @@
-import {createTransport} from 'nodemailer'
-import {query} from "lib/db";
-import {runMiddleware} from "lib/cors";
+import { createTransport } from 'nodemailer';
+import { query } from 'lib/db';
+import { runMiddleware } from 'lib/cors';
 
-import Cors from 'cors'
+import Cors from 'cors';
 
 const cors = Cors({
-    methods: ['POST','GET', 'HEAD'],
-})
+  methods: ['POST', 'GET', 'HEAD'],
+});
 
 async function mysql(username, email, codeName) {
-    /*
-    *  先查询他是否插入过了这条数据
-    * */
-    const querySql = `SELECT email from emailauth WHERE email='${email}';`
-    const valuesParams = []
-    const data = await query({query: querySql, values: valuesParams})
-    if(data.length === 0) {
-        // 首次插入
-        const insert = `INSERT INTO emailauth (username,email,code) VALUES ('${username}','${email}','${codeName}');`
-        await query({query: insert, values: []})
-        console.log('插入成功')
-    } else {
-        // 多次插入
-        const update = `UPDATE emailauth set code='${codeName}' WHERE email='${email}';`
-        await query({query: update, values: []})
-        console.log('更新成功')
-    }
-
+  /*
+   *  先查询他是否插入过了这条数据
+   * */
+  const querySql = `SELECT email from emailauth WHERE email='${email}';`;
+  const valuesParams = [];
+  const data = await query({ query: querySql, values: valuesParams });
+  if (data.length === 0) {
+    // 首次插入
+    const insert = `INSERT INTO emailauth (username,email,code) VALUES ('${username}','${email}','${codeName}');`;
+    await query({ query: insert, values: [] });
+    console.log('插入成功');
+  } else {
+    // 多次插入
+    const update = `UPDATE emailauth set code='${codeName}' WHERE email='${email}';`;
+    await query({ query: update, values: [] });
+    console.log('更新成功');
+  }
 }
 
 export default async function postWhitelistCode(req, res) {
-    if (req.method !== 'POST') return res.status(500).json({code: '2', msg: '请使用post请求'})
+  if (req.method !== 'POST') return res.status(500).json({ code: '2', msg: '请使用post请求' });
 
-    await runMiddleware(req,res,cors)
+  await runMiddleware(req, res, cors);
 
-    try {
-        const {username, email} = req.body || {};
+  try {
+    const { username, email } = req.body || {};
 
-        if (!username || !email) res.status(400).json({code: 2, msg: '检查参数是否完整'})
+    if (!username || !email) res.status(400).json({ code: 2, msg: '检查参数是否完整' });
 
-        //验证码
-        let codeName = Math.random().toString().substr(2, 4)
+    // 验证码
+    const codeName = Math.random().toString().substr(2, 4);
 
-        //插入数据库
-        await mysql(username, email, codeName);
+    // 插入数据库
+    await mysql(username, email, codeName);
 
-        let transporter = createTransport({
-            service: "QQ",
-            auth: {
-                // 发件人邮箱账号
-                user: '2943522391@qq.com',
-                //发件人邮箱的授权码 这里可以通过qq邮箱获取 并且不唯一
-                pass: 'dmyoxypllojwdghf'
-            }
-        });
+    const transporter = createTransport({
+      service: 'QQ',
+      auth: {
+        // 发件人邮箱账号
+        user: '2943522391@qq.com',
+        // 发件人邮箱的授权码 这里可以通过qq邮箱获取 并且不唯一
+        pass: 'dmyoxypllojwdghf',
+      },
+    });
 
-        // send mail with defined transport object
-        let info = await transporter.sendMail({
-            from: `"Hi,${username},HuaYu服务器邀请函🥰" <2943522391@qq.com>`, // 发件人
-            to: `${email}`, // 收件人
-            subject: `您的验证码:${codeName}`, // Subject line
-            text: "🙂感谢您来游玩本服!", // plain text body
-            html: `
+    // send mail with defined transport object
+    const info = await transporter.sendMail({
+      from: `"Hi,${username},HuaYu服务器邀请函🥰" <2943522391@qq.com>`, // 发件人
+      to: `${email}`, // 收件人
+      subject: `您的验证码:${codeName}`, // Subject line
+      text: '🙂感谢您来游玩本服!', // plain text body
+      html: `
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:v="urn:schemas-microsoft-com:vml"
@@ -457,13 +456,10 @@ width: 100% !important;
 </table>
 </body>
 </html>`, // html body
-        });
+    });
 
-
-        res.status(200).json({code: 1, msg: '请求成功,注意查收'})
-    } catch (err) {
-        console.log(err)
-    }
-
-
+    res.status(200).json({ code: 1, msg: '请求成功,注意查收' });
+  } catch (err) {
+    console.log(err);
+  }
 }
